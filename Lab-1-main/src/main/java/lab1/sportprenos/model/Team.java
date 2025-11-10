@@ -1,6 +1,6 @@
 package lab1.sportprenos.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,8 @@ public class Team {
     private String coach;
     private Integer foundedYear;
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("team")
     private List<Player> players = new ArrayList<>();
 
     public Team() {
